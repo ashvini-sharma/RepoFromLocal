@@ -1,0 +1,142 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf100
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Bold;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fnil\fcharset0 Menlo-Italic;\f4\fnil\fcharset0 Menlo-BoldItalic;}
+{\colortbl;\red255\green255\blue255;\red255\green255\blue10;\red205\green205\blue205;\red0\green0\blue0;
+\red27\green29\blue31;\red255\green255\blue255;\red222\green224\blue226;}
+{\*\expandedcolortbl;;\cssrgb\c99942\c98555\c0;\csgray\c84070;\csgray\c0\c0;
+\cssrgb\c14118\c15294\c16078;\cssrgb\c100000\c100000\c100000;\cssrgb\c89412\c90196\c90980;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww25400\viewh14580\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 								Git\
+\
+Query?\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\b0 \cf0 - Git, GitHub, BitBucket, Stash ?
+\f1\b \
+
+\f2\b0 - checkout vs fetch vs pull \
+- merge\
+- reset HEAD\
+- What is fork?\
+- What is snapshot?\
+- HEAD, ORIGIN, MASTER ?\
+- FETCH_HEAD\
+- PullRequest\
+- Trunk and Trunk based development \
+- How single src stores source of all branches ?\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f3\i \cf0 Ref: \
+https://www.git-tower.com/learn/git/faq/difference-between-git-fetch-git-pull\
+https://stackoverflow.com/questions/292357/difference-between-git-pull-and-git-fetch\
+https://www.youtube.com/watch?v=q6rYglziOjM\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\i0 \cf0 At server end there may be many 
+\f1\b projects
+\f2\b0 . \
+Each project can have many 
+\f1\b repositories
+\f2\b0 .\
+Each repository can have multiple 
+\f1\b branches
+\f2\b0 .\
+In terms of Git, repositories called 
+\f1\b origin
+\f2\b0 . There will a main root branch called 
+\f1\b master
+\f2\b0 . \
+To get repo code at client end, we 
+\f1\b \cb2 clone
+\f2\b0  a 
+\f1\b repository
+\f2\b0 \cb1 . At the time cloning, we provide which remote tracking branches we want at client end.\
+Once cloned, we see that in cloned folder at local, there is src, resources etc all source downloaded from origin (i.e. remote repo).\
+There is a .git folder. \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f3\i \cf0 \
+.git\
+  \'97\'97\'97 refs\
+        \'97\'97\'97\'97 remotes\
+        \'97\'97\'97\'97 heads\
+\
+remotes 
+\f2\i0  is maintain commit id of remote branches.\
+
+\f3\i heads    
+\f2\i0 maintains commit id for local working code.
+\f3\i    \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\i0 \cf0 When the repo was cloned, refs/remotes folder is populated with latest commit ids of each opted remote tracking branch. Same is for refs/heads.\
+master branch:/> git branch   -> master\
+checkout -> Lets you switch between branches \
+master branch:/> git checkout feature1   -> feature1\
+\
+Suppose, you are on some branch. After some time \cb3 feature1 branch:/> git fetch\cb1  will update the feature refs/remotes/feature1 with latest commit id.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb3 feature1 branch:/> git merge\cb4  will download the code as per commit id mentioned in refs/remote.feature1 file and merge it with local code.\cb1 \
+\
+Suppose we are not at master branch.\
+fetch -> updates latest commit id of master branch to .git/refs/remote/<master>\
+merge -> picks the commit id from .git/refs/remotes/<master> file, downloads that commit id code and and merges it with master branch local code \
+		 and updates the refs/heads/<master> file\
+pull  -> it is fetch + merge\
+	     i.e. updates latest commit id to .git/refs/remote/<master>\
+         and downloads .git/refs/remote/<master> commit id code from remote and merges to local master branch code and updates this commit id  in .git/refs/heads/<master>
+\f3\i \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\i0\b \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\b0 \cf0 \
+Since it involves a merge of remote code with your working copy, there may be merge conflicts. So, see that you don\'92t have any uncommitted local changes before a pull.\
+Use Git-Stash feature to locally save your such uncommitted local changes.. then pull .. then take back those saved changes to your working copy.\
+\
+Scenario::\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+git fetch will update the refs/remote/<master> . But suppose someone added a new branch brnch1 and u wanted to pull from this. \
+Since, u don\'92t have this brnch1 in refs/remote.. u can\'92t git fetch/pull/checkout.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f4\i\b \cf0 git fetch origin
+\f2\i0\b0  will update refs with all remote branches. To fetch brnch1 only 
+\f4\i\b git fetch Origin brnch1:brnch1
+\f2\i0\b0 \
+Now brnch1 is in refs/remotes with latest commit id. ( 
+\fs22 No refs/heads/<brnch1> file is there till now.
+\fs24  )\
+You may fetch/pull by first switching to that branch git checkout brnch1 and then git merge/pull\
+\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \expnd0\expndtw0\kerning0
+In its default mode, \cb7 git pull\cb6  is shorthand for \cb7 git fetch\cb6  followed by \cb7 git merge FETCH_HEAD\cb6 .\
+\
+\cf0 \cb1 \kerning1\expnd0\expndtw0 commit and push ::\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+commit id is always generated at client end. When you \cb3 brnch1 branch:/> git commit\cb4  it creates a new 
+\f1\b snapshot
+\f2\b0  and gives it a new commit id in refs/heads/brnch1 file.\
+Up to commit, all things are up to local only. A new snapshot has been created with a new commit id and update this in refs/heads/brnch1 .\
+Now, when you push, brnch1 local code is uploaded to repo/brnch1 branch with this newly generated commit id .. and refs/remotes/brnch1 commit id gets updated.\
+\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 Before commit there is a 
+\f1\b \cb2 staging area
+\f2\b0 \cb1 , where a file needs to be present. You add files to staging area by \cb2 git add\cb1  file1.txt\
+Since, now file1.txt is in staging area .. this will also be commited now.\
+\
+\
+}
